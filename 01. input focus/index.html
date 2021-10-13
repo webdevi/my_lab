@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#"> 
+  <title></title>
+  <style>
+    *{
+      font-size:15px;
+    }
+    body{
+      margin:0 auto;
+      min-height:100vh;
+      display:flex;
+      justify-content: center;      
+      align-items: center;
+    }
+    h3{
+      font-size:2em;
+      margin-bottom:20px;
+    }
+    #Search{
+      position:relative;
+    }
+    input{
+      height:50px;
+      width:400px;
+      border:0; 
+      outline:1px solid gray;
+      font-size:2em; 
+      padding:15px;
+    }
+    input:focus{ 
+      outline:1px solid red;
+    }
+    button{
+      position:absolute;
+      top: 0;
+      right: 0;
+      width:50px;
+      height:100%;
+      border: 0 none;
+      background-color: transparent;
+      cursor: pointer;
+      background: url(./search.png) no-repeat;
+      background-position:right center;
+    }
+    button span{
+      font-size:0;
+      line-height:0;
+    }
+    .wrap{    
+      height:300px;      
+      
+    }
+  </style>
+</head>
+<body>  
+  <div class="wrap">
+    <h3 >입력해보세요!</h3> 
+    <div class="wrap">
+      <form id="Search" name="Search" method="get">
+        <!-- onfocus를 넣어서 focus가 생기는 경우 값이 초기화되도록 함  -->
+        <input type="text" id="q" autocomplete="off" name="q" value="" onfocus="this.value=''" >
+        <button type="submit"  tabindex="2">
+          <span >검색하기</span>
+        </button>
+      </form>		 
+    </div>
+  </div>
+  <script>
+    const $input = document.querySelector("#q"); 
+    const q = getParameter("q");
+     
+    $input.value = getParameter = q;
+
+    function getParameter(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      const regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    function inputFocus(){
+      // 현재 활성화 되어 있는 ele; 
+      let focused = document.activeElement;  
+      if(focused === $input){
+        console.log('focus in');        
+        return;
+      }
+      $input.focus();        
+    }
+    window.document.addEventListener('keydown', inputFocus);
+  </script>
+</body>
+</html>
