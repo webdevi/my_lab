@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#"> 
+  <title>textarea autosize</title>
+  <style>
+      body{
+        background-color:rgb(253, 247, 239);
+        margin:0px;        
+        font-family: Georgia;
+      }
+      .wrapper{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;   
+        align-items: center;
+        min-height:100vh;
+      
+      }
+      h3{
+        font-size:1.8em;
+        text-shadow: 0 0 10px  rgba(255, 255, 255, 0.7);        
+      }
+      textarea{
+        margin:0px auto; 
+        width:500px;
+        padding:20px;
+        overflow-y: auto;
+        font-size:18px;
+        border: 1px solid rgba(136, 136, 135, 0.6); 
+        /* x-position y-position blur spread color */
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2); 
+        line-height:1.4em;
+        font-family: inherit;
+      }
+  </style>
+</head>
+<body>  
+  <div class="wrapper">
+  <h3>Textarea auto-resize</h3>
+  <textarea name="contents" cols="30" rows="5" placeholder="추가해주세요">
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, suscipit alias quidem sunt, earum architecto explicabo nostrum quis non culpa inventore placeat animi dignissimos quasi iure quod quia totam sit.
+Dolores quo, mollitia excepturi commodi vitae tempore velit maiores autem, eaque dolorum amet optio expedita culpa aut, harum quod eum ad error. Incidunt molestias a sapiente minus dignissimos asperiores laboriosam.
+Quo suscipit reiciendis laboriosam dignissimos culpa magnam non ipsam enim impedit vero eligendi minima nulla recusandae assumenda, debitis quod sunt doloribus vitae reprehenderit repellendus ratione cumque fuga. Magnam, amet fuga!
+Veniam eaque nisi enim, 
+  </textarea>
+</div>
+</body>
+<script>
+  const $contents = document.querySelector("textarea[name=contents]");   
+  $contents.style.height = ($contents.scrollHeight-25) + "px";
+
+  function resize(){
+    this.style.height = "1px"; //초기화라고 생각 
+    this.style.height = (3 + this.scrollHeight - 25) + "px";
+  }
+  
+  $contents.addEventListener("keydown", resize);
+  $contents.addEventListener("keyup", resize);
+</script>
+</html>
